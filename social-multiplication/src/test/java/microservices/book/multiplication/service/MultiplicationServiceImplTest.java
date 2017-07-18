@@ -56,6 +56,8 @@ public class MultiplicationServiceImplTest {
         Multiplication multiplication = new Multiplication(50, 60);
         User user = new User("john_doe");
         MultiplicationResultAttempt attempt = new MultiplicationResultAttempt(
+                user, multiplication, 3000, false);
+        MultiplicationResultAttempt verifiedAttempt = new MultiplicationResultAttempt(
                 user, multiplication, 3000, true);
         given(userRepository.findByAlias("john_doe")).willReturn(Optional.empty());
 
@@ -64,7 +66,7 @@ public class MultiplicationServiceImplTest {
 
         // assert
         assertThat(attemptResult).isTrue();
-        verify(attemptRepository).save(attempt);
+        verify(attemptRepository).save(verifiedAttempt);
     }
 
     @Test
